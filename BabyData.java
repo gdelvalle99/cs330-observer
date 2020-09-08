@@ -5,6 +5,9 @@ public class BabyData implements Subject{
     private int levelOfCrying;
     private ArrayList<Observer> observers;
 
+    BabyData(){
+        observers = new ArrayList<Observer>();
+    }
     public void removeObserver(Observer o){
         int i = observers.indexOf(o);
         if(i >= 0){
