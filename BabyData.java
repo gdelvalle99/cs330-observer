@@ -21,7 +21,7 @@ public class BabyData implements Subject{
 
     public void notifyObservers(){
         for(Observer o : observers){
-            o.update(crying, levelOfCrying);
+            o.update(this, crying, levelOfCrying);
         }
     }
 

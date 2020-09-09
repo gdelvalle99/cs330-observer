@@ -6,10 +6,11 @@ public class SimpleMonitor implements Observer {
         this.baby = babyData;
         baby.registerObserver(this);
     }
-    public void update(boolean crying, int level){
+    public void update(Subject baby, boolean crying, int level){
         this.cry = crying;
         display();
     }
+
 
     public void display(){
         if(this.baby.getCrying()){

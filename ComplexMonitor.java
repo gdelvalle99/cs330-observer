@@ -1,22 +1,45 @@
 public class ComplexMonitor implements Observer{
-    BabyData firstBaby;
-    BabyData secondBaby;
-    public void update(boolean crying, int level){
-        firstBaby.setData(crying, level);
-    }
-    
-    public void currentBabyDisplay(BabyData firstBaby){
+    private BabyData firstBaby;
+    private BabyData secondBaby;
+    private boolean firstCrying;
+    private boolean secondCrying;
+    private int firstLevel;
+    private int secondLevel;
+
+    ComplexMonitor(BabyData firstBaby, BabyData secondBaby){
         this.firstBaby = firstBaby;
+        firstBaby.registerObserver(this);
+        this.secondBaby = secondBaby;
+        secondBaby.registerObserver(this);
+    }
+
+    public void update(Subject baby, boolean crying, int level){
+        if(baby == firstBaby){
+            firstUpdate(crying, level);
+        }
+        else{
+            secondUpdate(crying, level);
+        }
         display();
+    }
+
+    public void firstUpdate(boolean crying, int level){
+        firstLevel = level;
+        firstCrying = crying;
+    }
+
+    public void secondUpdate(boolean crying, int level){
+        secondLevel = level;
+        secondCrying = crying;
     }
 
     public void display(){
         String message;
-        if(this.firstBaby.getCrying()){
-            if(this.firstBaby.getLevelOfCrying() == 0){
+        if(firstCrying){
+            if(firstLevel == 0){
                 message = "The first baby is crying and they are sobbing";
             }
-            else if(this.firstBaby.getLevelOfCrying() == 1){
+            else if(firstLevel == 1){
                 message = "The first baby is crying and they are crying";
             }
             else{
@@ -29,11 +52,11 @@ public class ComplexMonitor implements Observer{
 
         System.out.println(message);
 
-        if(this.secondBaby.getCrying()){
-            if(this.secondBaby.getLevelOfCrying() == 0){
+        if(secondCrying){
+            if(secondLevel == 0){
                 message = "The second baby is crying and they are sobbing";
             }
-            else if(this.secondBaby.getLevelOfCrying() == 1){
+            else if(secondLevel == 1){
                 message = "The second baby is crying and they are crying";
             }
             else{

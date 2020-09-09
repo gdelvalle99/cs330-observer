@@ -1,3 +1,3 @@
 interface Observer{
-    public void update(boolean crying, int level);
+    public void update(Subject baby, boolean crying, int level);
 }
